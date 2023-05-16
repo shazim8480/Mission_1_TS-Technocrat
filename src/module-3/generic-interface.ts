@@ -27,3 +27,6 @@ const userSecond : IUserInfo <string, IAddressType> = {
         country : "Bangladesh"
     }
 }
+
+console.log(userFirst, userSecond);
+
