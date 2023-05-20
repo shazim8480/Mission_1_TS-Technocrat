@@ -25,7 +25,24 @@ type RandomUser = {
 }
 
 // check property type > as generic template
-type CheckProperty <T> = T extends {id : number} ? true : false;
+type CheckProperty1 <T> = T extends {id : number} ? true : false;
+
+// to check a specific property using key of operator //
+type CheckProperty2 <T, K> = K extends keyof RandomUser ? true : false;
 
 // now give the final check
-type CheckUserID = CheckProperty<RandomUser>
+// if the userID in object exists
+type CheckUserID = CheckProperty1<RandomUser>;
+
+// if any property named "number" exists //
+type CheckUserNumber = CheckProperty2<RandomUser, "number"> // false
+type CheckUserName = CheckProperty2<RandomUser, "name"> // true
+
+
+// ======== remove a user using type conditional ======= //
+
+type Users = "u1" | "u2" | "u3" | "u4"
+
+type RemoveUser <T, K> = T extends K ? never : T; // setting the specific value to never makes sure that type doesn't exist in union types //
+
+type CurrentUser = RemoveUser <Users, "u2">
